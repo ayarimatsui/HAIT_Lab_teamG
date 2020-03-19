@@ -100,7 +100,7 @@ def main(word):
 
     返り値:
     """
-    data_dir = 'data/' #変える
+    data_dir = 'data/' + word
     if not os.path.exists(data_dir):
         os.makedirs(data_dir)
 
@@ -129,5 +129,5 @@ def main(word):
 
 
 if __name__ == '__main__':
-    word = input("検索ワードを入力してください : ")
+    word = input("検索ワードを入力してください(英語で) : ")
     main(word)
