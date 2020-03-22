@@ -1,9 +1,10 @@
 import os
-from flask import Flask, request, redirect, url_for
+from flask import Flask, request, redirect, url_for, render_template, send_from_directory
 from werkzeug.utils import secure_filename
+from judge import *
 
 UPLOAD_FOLDER = './uploads'
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'gif'])
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])  # gifではなくjpegに変更
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -23,8 +24,9 @@ def upload_file():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('uploaded_file', filename=filename))
+            save_name = 'temp.jpg'
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], save_name))
+            return redirect(url_for('result'))  # resultのページに遷移
     return '''
     <!doctype html>
     <html>
@@ -41,8 +43,16 @@ def upload_file():
     </html>
     '''
 
-from flask import send_from_directory
-
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+@app.route('/result', methods=['GET', 'POST'])
+def result():
+    filepath = os.path.join(app.config['UPLOAD_FOLDER'], 'temp.jpg')
+    judge = Judge(filepath)
+    result_food = judge.get_food()
+    result_calories = str(judge.get_calories()) + 'kcal'
+
+    # render_template('./result.html')
+    return render_template('./result.html', title='予想カロリー', predict_food=result_food, predict_calories=result_calories)
