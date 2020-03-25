@@ -8,8 +8,8 @@ import os, time, sys
 key = "取得したkey"
 secret = "取得したsecret"
 wait_time = 1 #1秒おきにリクエスト
-imgname = ["カレーライス", "牛丼", "ラーメン"]
-filename = ['curry', 'gyudon', 'ramen']
+imgname = ["カレーライス", "牛丼", "ラーメン", "白飯", "味噌汁", "肉じゃが", "焼き魚", "卵焼き", "ハンバーグ"]
+filename = ['curry', 'gyudon', 'ramen', 'rice', 'miso_soup', 'nikujaga', 'fried_fish', 'rolled_omlet', 'hamburg_steak']
 for i in range(len(imgname)):
     savedir = "./data/" + filename[i]
     if not os.path.exists(savedir):
@@ -17,7 +17,7 @@ for i in range(len(imgname)):
     flickr = FlickrAPI(key, secret, format='parsed-json')
     result = flickr.photos.search(
     text = imgname[i],
-    per_page = 500,
+    per_page = 1000,
     media = 'photos',
     sort = 'relevance',
     safe_search = 1,

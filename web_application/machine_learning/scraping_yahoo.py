@@ -91,7 +91,7 @@ def url_brancher(word):
 
 
 
-def main(word):
+def main(word_jp, word_en):
     """
     Fetchにより取得された情報をもとに画像ファイルを保存します。
 
@@ -100,11 +100,11 @@ def main(word):
 
     返り値:
     """
-    data_dir = 'data/' + word
+    data_dir = 'data/' + word_en + '_yahoo'
     if not os.path.exists(data_dir):
         os.makedirs(data_dir)
 
-    yahoo_url_list = url_brancher(word)
+    yahoo_url_list = url_brancher(word_jp)
 
     for i, yahoo_url in enumerate(yahoo_url_list):
         sleep(0.1)
@@ -129,5 +129,7 @@ def main(word):
 
 
 if __name__ == '__main__':
-    word = input("検索ワードを入力してください(英語で) : ")
-    main(word)
+    word_jp_list = ["カレーライス", "牛丼", "ラーメン", "白飯", "味噌汁", "肉じゃが", "焼き魚", "卵焼き", "ハンバーグ"]
+    word_en_list = ['curry', 'gyudon', 'ramen', 'rice', 'miso_soup', 'nikujaga', 'fried_fish', 'rolled_omlet', 'hamburg_steak']
+    for i in range(len(word_jp_list)):
+        main(word_jp_list[i], word_en_list[i])
