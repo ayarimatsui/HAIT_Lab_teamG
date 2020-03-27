@@ -1,0 +1,5 @@
+classes = 9
+train = data/images/train.txt
+valid = data/images/test.txt
+labels = data/obj.names
+backup = backup/

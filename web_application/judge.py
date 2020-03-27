@@ -7,10 +7,10 @@ import numpy as np
 class Judge():
 
     def __init__(self, img_path):
-        self.model = keras.models.load_model('VGG16/food_recognition.h5')
+        self.model = keras.models.load_model('VGG16/food_recognition_9.h5')   # 使うモデルによってここも変える
         self.img_path = img_path
-        self.food = ['カレーライス', '牛丼', 'ラーメン']
-        self.calories = [750, 656, 540]
+        self.food = ['カレーライス', '牛丼', 'ラーメン', '白飯', '味噌汁', '肉じゃが', '焼き魚', '卵焼き', 'ハンバーグ']   # 判別する料理の種類、数によってここを変える
+        self.calories = [750, 656, 540, 252, 56, 170, 203, 145, 494]   # 判別する料理の種類、数によってここを変える
 
     # 学習したモデルに基づいて何の料理なのかを判定
     def judge(self):
