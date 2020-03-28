@@ -1,10 +1,41 @@
-{% extends "layout.html" %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheet/result.css') }}">
+    <title>Food Recognition</title>
+  </head>
+  <body>
+    <div id="header">
+      <h1>判定結果</h1>
+    </div>
 
-<h3>料理名</h3>
-{{ predict_food }}
+    <div id="img">
+      <img src="{{ img_path }}" style="margin-top: 50px; margin-left: 50px; margin-right: 10px; height: 400px; float: left;" alt="判定結果画像" title="判定結果画像">
+    </div>
 
-<h3>カロリー</h3>
-{{ predict_calories }}
+    {% if result_list %}
+      <div id="calories">
+        <h2>合計カロリー : {{ total_calories }}kcal</h2><br>
 
-{% endblock %}
+        {% for i, food, calories, nutrients_list in result_list %}
+          <!--<h3>{{ food }} : {{ calories }}kcal</h3>-->
+          <div class="hidden_box">
+            <label for="label{{ i }}">{{ food }} : {{ calories }}kcal</label>
+            <input type="checkbox" id="label{{ i }}"/>
+            <div class="hidden_show">
+              <!--非表示ここから-->
+              <font size=”3”>　　　　　糖質　　食物繊維　　炭水化物　　(100gあたり)</font><br>
+              {% for nutrients in nutrients_list %}
+                <font size=”3”>{{nutrients}}g　　　</font>
+              {% endfor %}
+              <!--ここまで-->
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </body>
+</html>

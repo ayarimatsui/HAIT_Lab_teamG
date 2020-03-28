@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheet/index.css') }}">
+    <title>AIで栄養管理!</title>
+  </head>
+
+  <body>
+    <div id="header">
+      <h1>AIで栄養管理!</h1>
+    </div>
+
+    <div id="explanation">
+      <p style="line-height: 150%">
+        料理の画像をアップロードすると、AIが自動で何の料理かを判定し、そのカロリーや栄養素を教えてくれます。
+      </p>
+    </div>
+
+    <div id="fileupload">
+      <form method = post enctype = multipart/form-data>
+        <p><input type=file name=file>
+        <input type=submit value=Upload>
+      </form>
+    </div>
+  </body>
+</html>

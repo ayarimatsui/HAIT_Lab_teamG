@@ -11,6 +11,7 @@ class JudgeYOLO():
         self.classnames = ['curry', 'gyudon', 'ramen', 'rice', 'miso soup', 'nikujaga', 'grilled fish', 'rolled omlet', 'hamburg steak']
         self.food = ['カレーライス', '牛丼', 'ラーメン', '白飯', '味噌汁', '肉じゃが', '焼き魚', '卵焼き', 'ハンバーグ']   # 判別する料理の種類、数によってここを変える
         self.calories = [750, 656, 540, 252, 56, 170, 203, 145, 494]   # 判別する料理の種類、数によってここを変える
+        self.nutrients = [[18, 0.69, 3.1], [27, 0.5, 4.3], [9.9, 0.75, 2.8], [37, 0.3, 2.5], [1.8, 3, 2.2], [15, 2.3, 4], [0.1, 0, 20], [6.6, 0, 10], [12, 0, 13]] #糖質、食物繊維、たんぱく質
 
     # 判定コマンドを実行
     def run_detect(self):
@@ -19,7 +20,7 @@ class JudgeYOLO():
         #cmd = 'chmod +x ./darknet'
         #subprocess.call(cmd.split())
         #subprocess.call(['./darknet', 'detector', 'test', 'cfg/obj.data', 'cfg/yolo-obj.cfg', 'backup/yolo-obj_10000.weights', cur_img_path, '-thresh', '0.1'], shell=True)
-        os.system("./darknet detector test cfg/obj.data cfg/yolo-obj.cfg backup/yolo-obj_10000.weights " + cur_img_path + " -thresh 0.1")
+        os.system("./darknet detector test cfg/obj.data cfg/yolo-obj.cfg backup/yolo-obj_20000.weights " + cur_img_path + " -thresh 0.1")
         os.chdir('..')
 
     def get_class_id(self):
@@ -47,8 +48,17 @@ class JudgeYOLO():
         return sum(calories_list), calories_list
 
 
-# テスト用
+    # 栄養素を返す
+    def get_nutrients(self):
+        idx_list = self.get_class_id()
+        nutrients_list = []
+        for id in idx_list:
+            nutrients_list.append(self.nutrients[id])
+        return nutrients_list
 
+
+# テスト用
+'''
 if __name__ == '__main__':
     img_path = 'darknet/test12.jpeg'
     judge = JudgeYOLO(img_path)
@@ -60,3 +70,4 @@ if __name__ == '__main__':
     for i in range(n):
         print(food_list[i] + ' : ' + str(calories_list[i]) + 'kcal')
     print('合計カロリーは、' + str(total_calories) + 'kcal')
+'''
