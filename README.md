@@ -10,3 +10,23 @@ webページに料理の画像をアップロードすると、自動で何の�
 
 #### ※このリポジトリをcloneしても動かないので気をつけてください。具体的な手順は以下で説明していきます。(今後)
 
+＜実行できるようにするために＞  
+  
+まずはじめにYOLOを使うためにhttps://github.com/pjreddie/darknet からdarknetを自分のローカルのリポジトリにダウンロードします。  
+
+```
+$ git clone https://github.com/pjreddie/darknet.git
+$ cd darknet
+```
+コンパイルします。
+
+```
+$ make
+```
+
+確認のために以下のコマンドを実行してみます。
+
+```
+$ ./darknet
+```
+結果、`usage: ./darknet <function>`というエラーが出れば、darknetはちゃんと動いています。
