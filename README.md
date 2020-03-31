@@ -40,4 +40,4 @@ $ ./darknet
 ・darknet/data/に[obj.names](https://github.com/ayarimatsui/HAIT_Lab_teamG/blob/master/web_application/darknet/data/obj.names)  
 ・darknet/cfg/に[obj.data](https://github.com/ayarimatsui/HAIT_Lab_teamG/blob/master/web_application/darknet/cfg/obj.data)  
 ・darknet/cfg/に[yolo-obj.data](https://github.com/ayarimatsui/HAIT_Lab_teamG/blob/master/web_application/darknet/cfg/yolo-obj.cfg)  
-・darknet/backup/に学習済みモデルの重みのファイルを入れます。(現在準備中)
+・darknet/backup/に学習済みモデルの重みのファイルを入れます。
